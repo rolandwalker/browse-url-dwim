@@ -521,7 +521,6 @@ DEFAULT-STRING may be nil, in which case no default is inserted."
   "Turn on `browse-url-dwim-mode'.
 
 Turning on `browse-url-dwim' will activate keybindings as defined
-by `browse-url-dwim-keystrokes' and `browse-url-dwim-search-keystrokes'
 in `customize'.  It may also install a command alias for `browse'
 and `google' as controlled by `browse-url-dwim-install-aliases'.
 
@@ -552,7 +551,7 @@ is 'toggle."
                (not browse-url-dwim-less-feedback))
       (message "browse-url-dwim mode disabled")))))
 
-;;; interactive functions
+;;; interactive commands
 
 ;;;###autoload
 (defun browse-url-dwim (url)
