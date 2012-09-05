@@ -90,7 +90,7 @@
 ;;
 ;; Compatibility and Requirements
 ;;
-;;     Tested only on GNU Emacs version 24.1
+;;     Tested on GNU Emacs versions 23.3 and 24.1
 ;;
 ;;     Uses if present: string-utils.el
 ;;
@@ -398,7 +398,10 @@ behavior, and is constrained narrowly to defined Web protocols
 and popular top-level domains.
 
 If no prospective URL is found, returns nil."
-  (let ((thing-at-point-short-url-regexp (concat thing-at-point-short-url-regexp
+
+  (let ((thing-at-point-short-url-regexp (concat (if (boundp 'thing-at-point-short-url-regexp)
+                                                     thing-at-point-short-url-regexp
+                                                   "[-A-Za-z0-9]+\\.[-A-Za-z0-9.]+[^]\t\n\"'<>[^`{}]*[^]\t\n\"'<>[^`{}.,;]+")
                                                  "?\\."
                                                  (regexp-opt browse-url-dwim-permitted-tlds)))
         (case-fold-search t))
