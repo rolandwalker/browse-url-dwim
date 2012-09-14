@@ -154,10 +154,8 @@
 
 ;;; requires
 
-;; for let*, callf, callf2
-(eval-when-compile
-  (defvar thing-at-point-short-url-regexp)
-  (require 'cl))
+;; for callf, callf2
+(require 'cl)
 
 (require 'string-utils nil t)
 
@@ -168,6 +166,10 @@
 (autoload 'browse-url             "browse-url"  "Ask a WWW browser to load a URL."                 t)
 
 (declare-function string-utils-has-darkspace-p "string-utils.el")
+
+(eval-when-compile
+  ;; declarations for byte compiler
+  (defvar thing-at-point-short-url-regexp))
 
 ;;; constants
 
