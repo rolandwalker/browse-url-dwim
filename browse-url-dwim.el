@@ -5,8 +5,8 @@
 ;; Author: Roland Walker <walker@pobox.com>
 ;; Homepage: http://github.com/rolandwalker/browse-url-dwim
 ;; URL: http://raw.github.com/rolandwalker/browse-url-dwim/master/browse-url-dwim.el
-;; Version: 0.5.1
-;; Last-Updated: 6 Sep 2012
+;; Version: 0.5.2
+;; Last-Updated: 14 Sep 2012
 ;; EmacsWiki: BrowseUrlDwim
 ;; Keywords: hypermedia
 ;; Package-Requires: ((string-utils "0.0.3"))
@@ -181,7 +181,7 @@
 ;;;###autoload
 (defgroup browse-url-dwim nil
   "Context-sensitive external browse URL or Internet search."
-  :version "0.5.1"
+  :version "0.5.2"
   :link '(emacs-commentary-link "browse-url-dwim")
   :prefix "browse-url-dwim-"
   :group 'external
