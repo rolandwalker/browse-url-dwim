@@ -8,12 +8,15 @@ Context-sensitive external browse URL or Internet search from Emacs.
 Quickstart
 ----------
 
-    (require 'browse-url-dwim)
-    (browse-url-dwim-mode 1)
-    place the cursor on a URL
-    press "C-c b"
-    select some text
-    press "C-c g"
+	(require 'browse-url-dwim)
+
+	(browse-url-dwim-mode 1)
+
+	place the cursor on a URL
+	press "C-c b"
+
+	select some text
+	press "C-c g"
 
 browse-url-dwim
 ---------------
@@ -23,9 +26,9 @@ the functionality of `browse-url` and `thingatpt`.
 
 Three interactive commands are provided:
 
-    `browse-url-dwim`
-    `browse-url-dwim-search`
-    `browse-url-dwim-guess`
+	browse-url-dwim
+	browse-url-dwim-search
+	browse-url-dwim-guess
 
 each of which tries to extract URLs or meaningful terms from
 context in the current buffer, and prompts for input when unable
@@ -40,21 +43,21 @@ leading "http://".
 
 To use `browse-url-dwim`, add the following to your ~/.emacs file
 
-    (require 'browse-url-dwim)      ; load library
-    (browse-url-dwim-mode 1)        ; install aliases and keybindings
+	(require 'browse-url-dwim)      ; load library
+	(browse-url-dwim-mode 1)        ; install aliases and keybindings
 
 Then place the cursor on a URL and press
 
-    C-c b                           ; b for browse
+	C-c b                           ; b for browse
 
 or select some text and press
 
-    C-c g                           ; g for Google
+	C-c g                           ; g for Google
 
 or (equivalently)
 
-    M-x browse RET
-    M-x google RET
+	M-x browse RET
+	M-x google RET
 
 Outside the USA
 ---------------
@@ -75,7 +78,7 @@ By default, the minor mode binds and aliases `browse-url-dwim-guess`,
 for Internet search, but the user might prefer to bind
 `browse-url-dwim-search`, which has less DWIM:
 
-    (define-key browse-url-dwim-map (kbd "C-c g") 'browse-url-dwim-search)
+	(define-key browse-url-dwim-map (kbd "C-c g") 'browse-url-dwim-search)
 
 Compatibility and Requirements
 ------------------------------
