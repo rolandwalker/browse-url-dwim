@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/rolandwalker/browse-url-dwim.png)](http://travis-ci.org/rolandwalker/browse-url-dwim)
+
 Overview
 ========
 
