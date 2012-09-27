@@ -8,15 +8,17 @@ Context-sensitive external browse URL or Internet search from Emacs.
 Quickstart
 ----------
 
-	(require 'browse-url-dwim)
-
-	(browse-url-dwim-mode 1)
-
-	place the cursor on a URL
-	press "C-c b"
-
-	select some text
-	press "C-c g"
+```lisp
+(require 'browse-url-dwim)
+ 
+(browse-url-dwim-mode 1)
+ 
+;; place the cursor on a URL
+;; press "C-c b"
+ 
+;; select some text
+;; press "C-c g"
+```
 
 browse-url-dwim
 ---------------
@@ -43,8 +45,10 @@ leading "http://".
 
 To use `browse-url-dwim`, add the following to your ~/.emacs file
 
-	(require 'browse-url-dwim)      ; load library
-	(browse-url-dwim-mode 1)        ; install aliases and keybindings
+```lisp
+(require 'browse-url-dwim)      ; load library
+(browse-url-dwim-mode 1)        ; install aliases and keybindings
+```
 
 Then place the cursor on a URL and press
 
@@ -78,7 +82,9 @@ By default, the minor mode binds and aliases `browse-url-dwim-guess`,
 for Internet search, but the user might prefer to bind
 `browse-url-dwim-search`, which has less DWIM:
 
-	(define-key browse-url-dwim-map (kbd "C-c g") 'browse-url-dwim-search)
+```lisp
+(define-key browse-url-dwim-map (kbd "C-c g") 'browse-url-dwim-search)
+```
 
 Compatibility and Requirements
 ------------------------------
