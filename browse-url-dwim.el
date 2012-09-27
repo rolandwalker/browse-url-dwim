@@ -388,6 +388,72 @@ on success."
 
 ;;; utility functions
 
+(defun browse-url-dwim-coerce-to-web-url (url &optional any-scheme add-scheme)
+  "Coerce URL to a string representing a valid web address.
+
+Returns nil on failure.
+
+If ANY-SCHEME is set, no restriction is placed on permitted
+schemes in the URL.  Otherwise, `browse-url-dwim-permitted-schemes'
+is consulted.
+
+The scheme \"http://\" will be prepended in the absence of a
+scheme.  The default scheme can be changed by passing ADD-SCHEME.
+Note that ADD-SCHEME is a string which must include any required
+colon and slash characters.
+
+The value of `browse-url-dwim-permitted-tlds' is consulted when
+determining whether to add a scheme."
+  (unless (stringp 'add-scheme)
+    (setq add-scheme "http://"))
+  ;; stringify and clean up
+  (unless (stringp url)
+    (setq url (if url (format "%s" url) "")))
+  (callf substring-no-properties url)
+  ;; must have non-whitespace
+  (when (not (string-utils-has-darkspace-p url))
+    (setq url nil))
+  ;; add scheme when missing, if text otherwise looks like a URL
+  (when (and url
+             (not (aref (url-generic-parse-url url) 1))
+             (string-match-p (concat "\\`[^/]+\\." (regexp-opt browse-url-dwim-permitted-tlds) "\\(/\\|\\'\\)") url))
+    (callf2 concat add-scheme url))
+  ;; invalid scheme
+  (when (and url
+             (not any-scheme)
+             (not (member (aref (url-generic-parse-url url) 1) browse-url-dwim-permitted-schemes)))
+    (setq url nil))
+  ;; no hostname
+  (when (and url
+             (not (aref (url-generic-parse-url url) 4)))
+    (setq url nil))
+  ;; invalid hostname
+  (when (and url
+             (member (aref (url-generic-parse-url url) 1) browse-url-dwim-host-mandatary-schemes)
+             (not (string-match-p "\\." (aref (url-generic-parse-url url) 4))))
+    (setq url nil))
+  (when url
+    (url-normalize-url url)))
+
+(defun browse-url-dwim-add-prompt-default (prompt-string default-string &optional length-limit)
+  "Using PROMPT-STRING as a base, insert DEFAULT-STRING.
+
+The revised string is returned.
+
+Optional LENGTH-LIMIT (default 40) limits the length of the
+inserted default.
+
+PROMPT-STRING is expected to end with \": \", which will be added if
+not present.
+
+DEFAULT-STRING may be nil, in which case no default is inserted."
+  (setq length-limit (min (or length-limit 40) (length default-string)))
+  (save-match-data
+    (if (not default-string)
+        (replace-regexp-in-string "[: ]*\\'" ": " prompt-string)
+    (callf substring default-string 0 length-limit)
+    (replace-regexp-in-string "[: ]*\\'" (concat " (" default-string "): ") prompt-string))))
+
 (defun browse-url-dwim-context-url ()
   "Find a Web URL at the point or in the region.
 
@@ -442,53 +508,6 @@ a candidate is not found by other means."
         entered-text
       extracted-text)))
 
-(defun browse-url-dwim-coerce-to-web-url (url &optional any-scheme add-scheme)
-  "Coerce URL to a string representing a valid web address.
-
-Returns nil on failure.
-
-If ANY-SCHEME is set, no restriction is placed on permitted
-schemes in the URL.  Otherwise, `browse-url-dwim-permitted-schemes'
-is consulted.
-
-The scheme \"http://\" will be prepended in the absence of a
-scheme.  The default scheme can be changed by passing ADD-SCHEME.
-Note that ADD-SCHEME is a string which must include any required
-colon and slash characters.
-
-The value of `browse-url-dwim-permitted-tlds' is consulted when
-determining whether to add a scheme."
-  (unless (stringp 'add-scheme)
-    (setq add-scheme "http://"))
-  ;; stringify and clean up
-  (unless (stringp url)
-    (setq url (if url (format "%s" url) "")))
-  (callf substring-no-properties url)
-  ;; must have non-whitespace
-  (when (not (string-utils-has-darkspace-p url))
-    (setq url nil))
-  ;; add scheme when missing, if text otherwise looks like a URL
-  (when (and url
-             (not (aref (url-generic-parse-url url) 1))
-             (string-match-p (concat "\\`[^/]+\\." (regexp-opt browse-url-dwim-permitted-tlds) "\\(/\\|\\'\\)") url))
-    (callf2 concat add-scheme url))
-  ;; invalid scheme
-  (when (and url
-             (not any-scheme)
-             (not (member (aref (url-generic-parse-url url) 1) browse-url-dwim-permitted-schemes)))
-    (setq url nil))
-  ;; no hostname
-  (when (and url
-             (not (aref (url-generic-parse-url url) 4)))
-    (setq url nil))
-  ;; invalid hostname
-  (when (and url
-             (member (aref (url-generic-parse-url url) 1) browse-url-dwim-host-mandatary-schemes)
-             (not (string-match-p "\\." (aref (url-generic-parse-url url) 4))))
-    (setq url nil))
-  (when url
-    (url-normalize-url url)))
-
 (defun browse-url-dwim-make-search-prompt (search-url)
   "Given SEARCH-URL, return a prompt string.
 
@@ -499,25 +518,6 @@ The prompt string is based on `browse-url-dwim-prompt-list'."
                                (string-match-p (car cell) search-url))
                       (throw 'match (cdr cell)))))))
     (or prompt "Internet Search: ")))
-
-(defun browse-url-dwim-add-prompt-default (prompt-string default-string &optional length-limit)
-  "Using PROMPT-STRING as a base, insert DEFAULT-STRING.
-
-The revised string is returned.
-
-Optional LENGTH-LIMIT (default 40) limits the length of the
-inserted default.
-
-PROMPT-STRING is expected to end with \": \", which will be added if
-not present.
-
-DEFAULT-STRING may be nil, in which case no default is inserted."
-  (setq length-limit (min (or length-limit 40) (length default-string)))
-  (save-match-data
-    (if (not default-string)
-        (replace-regexp-in-string "[: ]*\\'" ": " prompt-string)
-    (callf substring default-string 0 length-limit)
-    (replace-regexp-in-string "[: ]*\\'" (concat " (" default-string "): ") prompt-string))))
 
 ;;; minor mode definition
 
