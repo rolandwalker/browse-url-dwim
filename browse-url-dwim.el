@@ -288,6 +288,9 @@ The format for key sequences is as defined by `kbd'."
 
 ;;; variables
 
+(defvar browse-url-dwim-mode nil
+  "Mode variable for `browse-url-dwim-mode'.")
+
 (defvar browse-url-history-list nil
   "A list of strings entered at `browse-url' prompts.")
 
