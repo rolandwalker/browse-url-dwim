@@ -588,9 +588,9 @@ is 'toggle."
    (t
     (when browse-url-dwim-install-aliases
       (when (eq (symbol-function 'browse) 'browse-url-dwim)
-        (defalias 'browse nil))
+        (fmakunbound 'browse))
       (when (eq (symbol-function 'google) 'browse-url-dwim-guess)
-        (defalias 'google nil)))
+        (fmakunbound 'google)))
     (when (and (browse-url-dwim-called-interactively-p 'interactive)
                (not browse-url-dwim-less-feedback))
       (message "browse-url-dwim mode disabled")))))
