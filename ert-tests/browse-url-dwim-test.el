@@ -205,7 +205,7 @@
 
 (ert-deftest browse-url-dwim-context-url-06 nil
   "Currently a limitation of using thing-at-point-short-url-regexp: two dots required in host"
-  :expected-result :failed
+  :expected-result (if (= emacs-major-version 23) :passed :failed)
   (let ((value "example.com"))
     (should
      (equal
@@ -217,7 +217,7 @@
 
 (ert-deftest browse-url-dwim-context-url-07 nil
   "Currently a limitation of using thing-at-point-short-url-regexp: two dots required in host"
-  :expected-result :failed
+  :expected-result (if (= emacs-major-version 23) :passed :failed)
   (let ((value "example.com/long/path/to/document.html"))
     (should
      (equal
