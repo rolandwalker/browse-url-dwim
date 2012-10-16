@@ -525,6 +525,37 @@ The prompt string is based on `browse-url-dwim-prompt-list'."
                       (throw 'match (cdr cell)))))))
     (or prompt "Internet Search: ")))
 
+(defun browse-url-dwim-find-search-text (&optional search-url guess)
+  "Find some text on which to conduct a search.
+
+Finds a URL or search string from the region, or text near the
+point, or from an interactive prompt.
+
+SEARCH-URL defaults to `browse-url-dwim-search-url'.
+
+If GUESS is non-nil, assume a URL extracted from text is good
+and skip an interactive prompt."
+  (callf or search-url browse-url-dwim-search-url)
+  (let* ((region (when (use-region-p) (buffer-substring-no-properties (region-beginning) (region-end))))
+         (region-url (browse-url-dwim-coerce-to-web-url region))
+         (prompt-string (browse-url-dwim-make-search-prompt search-url))
+         (entered-text "")
+         (text (or region-url region)))
+    (when (stringp text)
+      (callf substring-no-properties text))
+    (when (or (null text)
+              browse-url-dwim-always-confirm-extraction)
+      (callf or text (thing-at-point 'symbol))
+      (callf browse-url-dwim-add-prompt-default prompt-string text)
+      (setq entered-text
+            (if guess
+                (browse-url-dwim-get-url nil prompt-string text)
+              (read-from-minibuffer prompt-string nil nil nil 'browse-url-history-list))))
+    (when (string-utils-has-darkspace-p entered-text)
+      (setq text entered-text))
+    text))
+
+
 ;;; minor mode definition
 
 ;;;###autoload
@@ -595,22 +626,7 @@ the context around the point.  If so, this command is equivalent to
   (interactive)
   (callf or search-url browse-url-dwim-search-url)
   (unless text
-    (let* ((region (if (use-region-p) (buffer-substring-no-properties (region-beginning) (region-end))))
-           (region-url (browse-url-dwim-coerce-to-web-url region))
-           (prompt-string (browse-url-dwim-make-search-prompt search-url))
-           (entered-text ""))
-      (setq text (or region-url region))
-      (when (or (null text)
-                browse-url-dwim-always-confirm-extraction)
-        (callf or text (thing-at-point 'symbol))
-        (when (stringp text)
-          (callf substring-no-properties text))
-        (callf browse-url-dwim-add-prompt-default prompt-string text)
-        (if guess
-            (setq entered-text (browse-url-dwim-get-url nil (browse-url-dwim-make-search-prompt browse-url-dwim-search-url) text))
-          (setq entered-text (read-from-minibuffer prompt-string nil nil nil 'browse-url-history-list))))
-      (when (string-utils-has-darkspace-p entered-text)
-        (setq text entered-text))))
+    (setq text (browse-url-dwim-find-search-text search-url guess)))
   (cond
     ((not (string-utils-has-darkspace-p text))
      (error "No valid query or URL"))
