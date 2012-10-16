@@ -477,7 +477,8 @@ If no prospective URL is found, returns nil."
                                                      thing-at-point-short-url-regexp
                                                    "[-A-Za-z0-9]+\\.[-A-Za-z0-9.]+[^]\t\n\"'<>[^`{}]*[^]\t\n\"'<>[^`{}.,;]+")
                                                  "?\\."
-                                                 (regexp-opt browse-url-dwim-permitted-tlds)))
+                                                 (regexp-opt browse-url-dwim-permitted-tlds)
+                                                 "\\(?:/[^ \t\r\f\n]+\\)?"))
         (case-fold-search t))
     (or (and (use-region-p)
              (browse-url-dwim-coerce-to-web-url (buffer-substring-no-properties (region-beginning) (region-end))))
