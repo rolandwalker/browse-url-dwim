@@ -475,7 +475,7 @@ behavior, and is constrained narrowly to defined Web protocols
 and popular top-level domains.
 
 If no prospective URL is found, returns nil."
-
+  (require 'thingatpt nil t)
   (let ((thing-at-point-short-url-regexp (concat (if (boundp 'thing-at-point-short-url-regexp)
                                                      thing-at-point-short-url-regexp
                                                    "[-A-Za-z0-9]+\\.[-A-Za-z0-9.]+[^]\t\n\"'<>[^`{}]*[^]\t\n\"'<>[^`{}.,;]+")
