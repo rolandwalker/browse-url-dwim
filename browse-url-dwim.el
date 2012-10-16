@@ -578,8 +578,10 @@ is 'toggle."
   (cond
    (browse-url-dwim-mode
     (when browse-url-dwim-install-aliases
-      (defalias 'browse 'browse-url-dwim)
-      (defalias 'google 'browse-url-dwim-guess))
+      (unless (eq (symbol-function 'browse) 'osx-browse-url)
+        (defalias 'browse 'browse-url-dwim))
+      (unless (eq (symbol-function 'google) 'osx-browse-guess)
+        (defalias 'google 'browse-url-dwim-guess)))
     (when (and (browse-url-dwim-called-interactively-p 'interactive)
                (not browse-url-dwim-less-feedback))
       (message "browse-url-dwim mode enabled")))
