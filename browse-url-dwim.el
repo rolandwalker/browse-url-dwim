@@ -410,7 +410,7 @@ colon and slash characters.
 
 The value of `browse-url-dwim-permitted-tlds' is consulted when
 determining whether to add a scheme."
-  (unless (stringp 'add-scheme)
+  (unless (stringp add-scheme)
     (setq add-scheme "http://"))
   ;; stringify and clean up
   (unless (stringp url)
