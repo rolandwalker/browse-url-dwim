@@ -553,7 +553,7 @@ and skip an interactive prompt."
       (callf browse-url-dwim-add-prompt-default prompt-string text)
       (setq entered-text
             (if guess
-                (browse-url-dwim-get-url nil prompt-string text)
+                (browse-url-dwim-get-url nil (browse-url-dwim-make-search-prompt search-url) text)
               (read-from-minibuffer prompt-string nil nil nil 'browse-url-history-list))))
     (when (string-utils-has-darkspace-p entered-text)
       (setq text entered-text))
