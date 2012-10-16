@@ -429,14 +429,11 @@ determining whether to add a scheme."
              (not any-scheme)
              (not (member (aref (url-generic-parse-url url) 1) browse-url-dwim-permitted-schemes)))
     (setq url nil))
-  ;; no hostname
-  (when (and url
-             (not (aref (url-generic-parse-url url) 4)))
-    (setq url nil))
-  ;; invalid hostname
+  ;; no hostname or invalid hostname
   (when (and url
              (member (aref (url-generic-parse-url url) 1) browse-url-dwim-host-mandatary-schemes)
-             (not (string-match-p "\\." (aref (url-generic-parse-url url) 4))))
+             (or (not (aref (url-generic-parse-url url) 4))
+                 (not (string-match-p "\\." (aref (url-generic-parse-url url) 4)))))
     (setq url nil))
   (when url
     (url-normalize-url url)))
