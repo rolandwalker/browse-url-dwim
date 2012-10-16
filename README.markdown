@@ -18,6 +18,9 @@ Quickstart
  
 ;; select some text
 ;; press "C-c g"
+ 
+;; to turn off confirmations
+(setq browse-url-dwim-always-confirm-extraction nil)
 ```
 
 browse-url-dwim

@@ -27,6 +27,9 @@
 ;;     select some text
 ;;     press "C-c g"
 ;;
+;;     ;; to turn off confirmations
+;;     (setq browse-url-dwim-always-confirm-extraction nil)
+;;
 ;; Explanation
 ;;
 ;; This small library for calling external browsers combines some of
@@ -626,9 +629,9 @@ Optional SEARCH-URL specifies the URL fragment used to construct
 the search request.  If not specified, the customizable variable
 `browse-url-dwim-search-url' is used.
 
-If GUESS is non-nil, an attempt will be made to extract a URL from
-the context around the point.  If so, this command is equivalent to
-`browse-url-dwim'."
+If GUESS is non-nil, an attempt will be made to extract a URL
+from the context around the point.  If successful, this command
+is equivalent to `browse-url-dwim'."
   (interactive)
   (callf or search-url browse-url-dwim-search-url)
   (unless text
