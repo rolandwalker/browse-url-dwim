@@ -416,25 +416,28 @@ determining whether to add a scheme."
   (unless (stringp url)
     (setq url (if url (format "%s" url) "")))
   (callf substring-no-properties url)
-  ;; must have non-whitespace
-  (when (not (string-utils-has-darkspace-p url))
-    (setq url nil))
-  ;; add scheme when missing, if text otherwise looks like a URL
-  (when (and url
-             (not (aref (url-generic-parse-url url) 1))
-             (string-match-p (concat "\\`[^/]+\\." (regexp-opt browse-url-dwim-permitted-tlds) "\\(/\\|\\'\\)") url))
-    (callf2 concat add-scheme url))
-  ;; invalid scheme
-  (when (and url
-             (not any-scheme)
-             (not (member (aref (url-generic-parse-url url) 1) browse-url-dwim-permitted-schemes)))
-    (setq url nil))
-  ;; no hostname or invalid hostname
-  (when (and url
-             (member (aref (url-generic-parse-url url) 1) browse-url-dwim-host-mandatary-schemes)
-             (or (not (aref (url-generic-parse-url url) 4))
-                 (not (string-match-p "\\." (aref (url-generic-parse-url url) 4)))))
-    (setq url nil))
+  (let ((parsed nil))
+    (setq url
+          (catch 'url
+            ;; must have non-whitespace
+            (when (not (string-utils-has-darkspace-p url))
+              (throw 'url nil))
+            (setq parsed (url-generic-parse-url url))
+            ;; add scheme when missing, if text otherwise looks like a URL
+            (when (and (not (aref parsed 1))
+                       (string-match-p (concat "\\`[^/]+\\." (regexp-opt browse-url-dwim-permitted-tlds) "\\(/\\|\\'\\)") url))
+              (callf2 concat add-scheme url)
+              (setq parsed (url-generic-parse-url url)))
+            ;; invalid scheme
+            (when (and (not any-scheme)
+                       (not (member (aref parsed 1) browse-url-dwim-permitted-schemes)))
+              (throw 'url nil))
+            ;; no hostname or invalid hostname
+            (when (and (member (aref parsed 1) browse-url-dwim-host-mandatary-schemes)
+                       (or (not (aref parsed 4))
+                           (not (string-match-p "\\." (aref parsed 4)))))
+              (throw 'url nil))
+            (throw 'url url))))
   (when url
     (url-normalize-url url)))
 
