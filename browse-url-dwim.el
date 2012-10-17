@@ -516,7 +516,8 @@ a candidate is not found by other means."
               (not extracted-text))
       (callf or extracted-text fallback-default)
       (callf browse-url-dwim-add-prompt-default prompt-string extracted-text)
-      (setq entered-text (read-from-minibuffer prompt-string nil nil nil 'browse-url-history-list)))
+      (setq entered-text (replace-regexp-in-string "[\t\r\n\f]+" " "
+                            (read-from-minibuffer prompt-string nil nil nil 'browse-url-history-list))))
     (if (string-utils-has-darkspace-p entered-text)
         entered-text
       extracted-text)))
@@ -560,6 +561,8 @@ and skip an interactive prompt."
               (read-from-minibuffer prompt-string nil nil nil 'browse-url-history-list))))
     (when (string-utils-has-darkspace-p entered-text)
       (setq text entered-text))
+    (when (stringp text)
+      (setq text (replace-regexp-in-string "[\t\r\n\f]+" " " text)))
     text))
 
 
