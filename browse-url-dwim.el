@@ -588,18 +588,22 @@ is 'toggle."
   (cond
    (browse-url-dwim-mode
     (when browse-url-dwim-install-aliases
-      (unless (eq (symbol-function 'browse) 'osx-browse-url)
+      (unless (and (fboundp 'browse)
+                   (eq (symbol-function 'browse) 'osx-browse-url))
         (defalias 'browse 'browse-url-dwim))
-      (unless (eq (symbol-function 'google) 'osx-browse-guess)
+      (unless (and (fboundp 'google)
+                   (eq (symbol-function 'google) 'osx-browse-guess))
         (defalias 'google 'browse-url-dwim-guess)))
     (when (and (browse-url-dwim-called-interactively-p 'interactive)
                (not browse-url-dwim-less-feedback))
       (message "browse-url-dwim mode enabled")))
    (t
     (when browse-url-dwim-install-aliases
-      (when (eq (symbol-function 'browse) 'browse-url-dwim)
+      (when (and (fboundp 'browse)
+                 (eq (symbol-function 'browse) 'browse-url-dwim))
         (fmakunbound 'browse))
-      (when (eq (symbol-function 'google) 'browse-url-dwim-guess)
+      (when (and (fboundp 'google)
+                 (eq (symbol-function 'google) 'browse-url-dwim-guess))
         (fmakunbound 'google)))
     (when (and (browse-url-dwim-called-interactively-p 'interactive)
                (not browse-url-dwim-less-feedback))
