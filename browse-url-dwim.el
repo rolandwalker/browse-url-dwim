@@ -161,7 +161,7 @@
 ;;; Code:
 ;;
 
-;;; requires
+;;; requirements
 
 ;; for callf, callf2
 (require 'cl)
@@ -174,10 +174,11 @@
 (autoload 'url-hexify-string      "url-util"    "Return a new string that is STRING URI-encoded."  nil)
 (autoload 'browse-url             "browse-url"  "Ask a WWW browser to load a URL."                 t)
 
+;;; declarations
+
 (declare-function string-utils-has-darkspace-p "string-utils.el")
 
 (eval-when-compile
-  ;; declarations for byte compiler
   (defvar thing-at-point-short-url-regexp))
 
 ;;; constants
