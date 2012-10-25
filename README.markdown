@@ -23,8 +23,8 @@ Quickstart
 (setq browse-url-dwim-always-confirm-extraction nil)
 ```
 
-browse-url-dwim
----------------
+Explanation
+-----------
 
 This small library for calling external browsers combines some of
 the functionality of `browse-url` and `thingatpt`.
