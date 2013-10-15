@@ -381,6 +381,8 @@
 
 ;;; todo - browse-url-dwim-guess (&optional text search-url)
 
+;;; todo - browse-url-dwim-mode
+
 ;;
 ;; Emacs
 ;;

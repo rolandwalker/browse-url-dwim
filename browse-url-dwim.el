@@ -193,7 +193,7 @@
   "Context-sensitive external browse URL or Internet search."
   :version "0.6.4"
   :link '(emacs-commentary-link :tag "Commentary" "browse-url-dwim")
-  :link '(url-link :tag "Github" "http://github.com/rolandwalker/browse-url-dwim")
+  :link '(url-link :tag "GitHub" "http://github.com/rolandwalker/browse-url-dwim")
   :link '(url-link :tag "EmacsWiki" "http://emacswiki.org/emacs/BrowseUrlDwim")
   :prefix "browse-url-dwim-"
   :group 'external
