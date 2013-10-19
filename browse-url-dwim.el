@@ -96,7 +96,7 @@
 ;;
 ;; Compatibility and Requirements
 ;;
-;;     GNU Emacs version 24.4-devel     : no, at the time of writing
+;;     GNU Emacs version 24.4-devel     : yes, at the time of writing
 ;;     GNU Emacs version 24.3           : yes
 ;;     GNU Emacs version 23.3           : yes
 ;;     GNU Emacs version 22.3 and lower : no
@@ -169,6 +169,8 @@
 (require 'string-utils nil t)
 
 (autoload 'thing-at-point         "thingatpt"   "Return the THING at point."                       nil)
+(autoload 'thing-at-point-looking-at   "thingatpt"   "Return non-nil if point is in or just after a match for REGEXP." nil)
+(autoload 'thing-at-point-url-at-point "thingatpt"   "Return the URL around or before point."           nil)
 (autoload 'url-generic-parse-url  "url-parse"   "Return an URL-struct of the parts of URL."        nil)
 (autoload 'url-normalize-url      "url-util"    "Return a 'normalized' version of URL."            nil)
 (autoload 'url-hexify-string      "url-util"    "Return a new string that is STRING URI-encoded."  nil)
@@ -495,9 +497,14 @@ If no prospective URL is found, returns nil."
                                                  (regexp-opt browse-url-dwim-permitted-tlds)
                                                  "\\(?:/[^ \t\r\f\n]+\\)?"))
         (case-fold-search t))
-    (or (and (use-region-p)
+    (or
+     (and (use-region-p)
              (browse-url-dwim-coerce-to-web-url (buffer-substring-no-properties (region-beginning) (region-end))))
-        (browse-url-dwim-coerce-to-web-url (thing-at-point 'url)))))
+     ;; invoke thing-at-point in various ways to make it work with various revisions
+     (browse-url-dwim-coerce-to-web-url (ignore-errors (thing-at-point 'url)))
+     (and (ignore-errors (thing-at-point-looking-at thing-at-point-short-url-regexp))
+          (browse-url-dwim-coerce-to-web-url (buffer-substring-no-properties (match-beginning 0) (match-end 0))))
+     (and (browse-url-dwim-coerce-to-web-url (ignore-errors (thing-at-point-url-at-point 'lax)))))))
 
 (defun browse-url-dwim-get-url (&optional always-prompt prompt-string fallback-default)
   "Find a Web URL by context or user input.
