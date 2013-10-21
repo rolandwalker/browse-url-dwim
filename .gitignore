@@ -1,3 +1,4 @@
 /ert-tests/ert.el
 /ert-tests/list-utils.el
 /ert-tests/string-utils.el
+*-autoloads.el
