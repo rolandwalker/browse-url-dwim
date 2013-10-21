@@ -37,7 +37,7 @@ TEST_DEP_2=list-utils
 TEST_DEP_2_STABLE_URL=https://raw.github.com/rolandwalker/list-utils/a34f1d5c0be3faadd76680509e958797a60c0a41/list-utils.el
 TEST_DEP_2_LATEST_URL=https://raw.github.com/rolandwalker/list-utils/master/list-utils.el
 TEST_DEP_3=string-utils
-TEST_DEP_3_STABLE_URL=https://raw.github.com/rolandwalker/string-utils/cefb98ecf8257f69d8288929fc0425f145484452/string-utils.el
+TEST_DEP_3_STABLE_URL=https://raw.github.com/rolandwalker/string-utils/4ea99e1c65e8f1e4ee978471f24d0421b6bafa83/string-utils.el
 TEST_DEP_3_LATEST_URL=https://raw.github.com/rolandwalker/string-utils/master/string-utils.el
 
 .PHONY : build dist not-dirty pkg-version downloads downloads-latest autoloads \

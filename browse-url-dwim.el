@@ -9,7 +9,7 @@
 ;; Last-Updated: 22 Oct 2012
 ;; EmacsWiki: BrowseUrlDwim
 ;; Keywords: hypermedia
-;; Package-Requires: ((string-utils "0.0.3"))
+;; Package-Requires: ((string-utils "0.3.0"))
 ;;
 ;; Simplified BSD License
 ;;
