@@ -467,7 +467,7 @@ determining whether to add a scheme."
 	    (setq struct-offset (if (symbolp (aref parsed 0)) 1 0))
             ;; add scheme when missing, if text otherwise looks like a URL
             (when (and (not (aref parsed (+ 0 struct-offset)))
-                       (string-match-p (concat "\\`[^/]+\\." (regexp-opt browse-url-dwim-permitted-tlds) "\\(/\\|\\'\\)") url))
+                       (string-match-p (concat "\\`[^/]+\\." "\\(?:" (regexp-opt browse-url-dwim-permitted-tlds) "\\)" "\\(/\\|\\'\\)") url))
               (callf2 concat add-scheme url)
               (setq parsed (url-generic-parse-url url))
 	      (setq struct-offset (if (symbolp (aref parsed 0)) 1 0)))
@@ -520,7 +520,7 @@ If no prospective URL is found, returns nil."
                                                      thing-at-point-short-url-regexp
                                                    "[-A-Za-z0-9]+\\.[-A-Za-z0-9.]+[^]\t\n \"'<>[^`{}]*[^]\t\n \"'<>[^`{}.,;]+")
                                                  "?\\."
-                                                 (regexp-opt browse-url-dwim-permitted-tlds)
+                                                 "\\(?:" (regexp-opt browse-url-dwim-permitted-tlds) "\\)"
                                                  "\\(?:/[^ \t\r\f\n]+\\)?"))
         (case-fold-search t))
     (or
