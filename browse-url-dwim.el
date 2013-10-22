@@ -401,6 +401,9 @@ in GNU Emacs 24.1 or higher."
 
 (unless (fboundp 'use-region-p)
   ;; added in 23.x
+  (unless (boundp 'use-empty-active-region)
+    (defvar use-empty-active-region nil
+      "Whether \"region-aware\" commands should act on empty regions."))
   (defun use-region-p ()
   "Return t if the region is active and it is appropriate to act on it."
   (and (region-active-p)
