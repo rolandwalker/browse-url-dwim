@@ -457,20 +457,20 @@ determining whether to add a scheme."
     (setq url (if url (format "%s" url) "")))
   (callf substring-no-properties url)
   (let ((parsed nil)
-	(struct-offset))
+        (struct-offset))
     (setq url
           (catch 'url
             ;; must have non-whitespace
             (when (not (string-utils-has-darkspace-p url))
               (throw 'url nil))
             (setq parsed (url-generic-parse-url url))
-	    (setq struct-offset (if (symbolp (aref parsed 0)) 1 0))
+            (setq struct-offset (if (symbolp (aref parsed 0)) 1 0))
             ;; add scheme when missing, if text otherwise looks like a URL
             (when (and (not (aref parsed (+ 0 struct-offset)))
                        (string-match-p (concat "\\`[^/]+\\." "\\(?:" (regexp-opt browse-url-dwim-permitted-tlds) "\\)" "\\(/\\|\\'\\)") url))
               (callf2 concat add-scheme url)
               (setq parsed (url-generic-parse-url url))
-	      (setq struct-offset (if (symbolp (aref parsed 0)) 1 0)))
+              (setq struct-offset (if (symbolp (aref parsed 0)) 1 0)))
             ;; invalid scheme
             (when (and (not any-scheme)
                        (not (member (aref parsed (+ 0 struct-offset)) browse-url-dwim-permitted-schemes)))
