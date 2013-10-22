@@ -527,7 +527,7 @@ If no prospective URL is found, returns nil."
      (browse-url-dwim-coerce-to-web-url (ignore-errors (thing-at-point 'url)))
      (and (ignore-errors (thing-at-point-looking-at thing-at-point-short-url-regexp))
           (browse-url-dwim-coerce-to-web-url (buffer-substring-no-properties (match-beginning 0) (match-end 0))))
-     (and (browse-url-dwim-coerce-to-web-url (ignore-errors (thing-at-point-url-at-point 'lax)))))))
+     (browse-url-dwim-coerce-to-web-url (ignore-errors (thing-at-point-url-at-point 'lax))))))
 
 (defun browse-url-dwim-get-url (&optional always-prompt prompt-string fallback-default)
   "Find a Web URL by context or user input.
