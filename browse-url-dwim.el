@@ -399,6 +399,13 @@ in GNU Emacs 24.1 or higher."
 
 ;;; compatibility functions
 
+(unless (fboundp 'use-region-p)
+  ;; added in 23.x
+  (defun use-region-p ()
+  "Return t if the region is active and it is appropriate to act on it."
+  (and (region-active-p)
+       (or use-empty-active-region (> (region-end) (region-beginning))))))
+
 (unless (fboundp 'string-match-p)
   ;; added in 23.x
   (defun string-match-p (regexp string &optional start)
