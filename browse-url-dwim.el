@@ -406,6 +406,12 @@ in GNU Emacs 24.1 or higher."
   (and (region-active-p)
        (or use-empty-active-region (> (region-end) (region-beginning))))))
 
+(unless (fboundp 'region-active-p)
+  ;; added in 23.x
+  (defun region-active-p ()
+  "Return t if Transient Mark mode is enabled and the mark is active."
+  (and transient-mark-mode mark-active)))
+
 (unless (fboundp 'string-match-p)
   ;; added in 23.x
   (defun string-match-p (regexp string &optional start)
