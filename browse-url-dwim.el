@@ -453,26 +453,29 @@ determining whether to add a scheme."
   (unless (stringp url)
     (setq url (if url (format "%s" url) "")))
   (callf substring-no-properties url)
-  (let ((parsed nil))
+  (let ((parsed nil)
+	(struct-offset))
     (setq url
           (catch 'url
             ;; must have non-whitespace
             (when (not (string-utils-has-darkspace-p url))
               (throw 'url nil))
             (setq parsed (url-generic-parse-url url))
+	    (setq struct-offset (if (symbolp (aref parsed 0)) 1 0))
             ;; add scheme when missing, if text otherwise looks like a URL
-            (when (and (not (aref parsed 1))
+            (when (and (not (aref parsed (+ 0 struct-offset)))
                        (string-match-p (concat "\\`[^/]+\\." (regexp-opt browse-url-dwim-permitted-tlds) "\\(/\\|\\'\\)") url))
               (callf2 concat add-scheme url)
-              (setq parsed (url-generic-parse-url url)))
+              (setq parsed (url-generic-parse-url url))
+	      (setq struct-offset (if (symbolp (aref parsed 0)) 1 0)))
             ;; invalid scheme
             (when (and (not any-scheme)
-                       (not (member (aref parsed 1) browse-url-dwim-permitted-schemes)))
+                       (not (member (aref parsed (+ 0 struct-offset)) browse-url-dwim-permitted-schemes)))
               (throw 'url nil))
             ;; no hostname or invalid hostname
-            (when (and (member (aref parsed 1) browse-url-dwim-host-mandatary-schemes)
-                       (or (not (aref parsed 4))
-                           (not (string-match-p "\\." (aref parsed 4)))))
+            (when (and (member (aref parsed (+ 0 struct-offset)) browse-url-dwim-host-mandatary-schemes)
+                       (or (not (aref parsed (+ 3 struct-offset)))
+                           (not (string-match-p "\\." (aref parsed (+ 3 struct-offset))))))
               (throw 'url nil))
             (throw 'url url))))
   (when url
