@@ -1,6 +1,6 @@
 ;;; browse-url-dwim.el --- Context-sensitive external browse URL or Internet search
 ;;
-;; Copyright (c) 2012 Roland Walker
+;; Copyright (c) 2012-13 Roland Walker
 ;;
 ;; Author: Roland Walker <walker@pobox.com>
 ;; Homepage: http://github.com/rolandwalker/browse-url-dwim
@@ -124,9 +124,6 @@
 ;;; License
 ;;
 ;;     Simplified BSD License
-;;
-;;     Copyright (c) 2012, Roland Walker
-;;     All rights reserved.
 ;;
 ;;     Redistribution and use in source and binary forms, with or
 ;;     without modification, are permitted provided that the following
