@@ -4,7 +4,7 @@
 ;;
 ;; Author: Roland Walker <walker@pobox.com>
 ;; Homepage: http://github.com/rolandwalker/browse-url-dwim
-;; URL: http://raw.github.com/rolandwalker/browse-url-dwim/master/browse-url-dwim.el
+;; URL: http://raw.githubusercontent.com/rolandwalker/browse-url-dwim/master/browse-url-dwim.el
 ;; Version: 0.6.6
 ;; Last-Updated: 26 Oct 2013
 ;; EmacsWiki: BrowseUrlDwim
