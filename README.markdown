@@ -52,11 +52,11 @@ To use `browse-url-dwim`, add the following to your ~/.emacs file
 
 Then place the cursor on a URL and press
 
-<kbd>C-c</kbd> <kbd>b</kbd>  **(mnemonic: b for browse)**
+<kbd>C-c</kbd> <kbd>b</kbd>  *(mnemonic: b for browse)*
 
 or select some text and press
 
-<kbd>C-c</kbd> <kbd>g</kbd>  **(mnemonic: g for Google)**
+<kbd>C-c</kbd> <kbd>g</kbd>  *(mnemonic: g for Google)*
 
 or (equivalently)
 
