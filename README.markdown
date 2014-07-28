@@ -8,7 +8,7 @@ Context-sensitive external browse URL or Internet search from Emacs.
 Quickstart
 ----------
 
-```lisp
+```elisp
 (require 'browse-url-dwim)
  
 (browse-url-dwim-mode 1)
@@ -48,7 +48,7 @@ leading "http://".
 
 To use `browse-url-dwim`, add the following to your ~/.emacs file
 
-```lisp
+```elisp
 (require 'browse-url-dwim)      ; load library
 (browse-url-dwim-mode 1)        ; install aliases and keybindings
 ```
@@ -85,7 +85,7 @@ By default, the minor mode binds and aliases `browse-url-dwim-guess`,
 for Internet search, but the user might prefer to bind
 `browse-url-dwim-search`, which has less DWIM:
 
-```lisp
+```elisp
 (define-key browse-url-dwim-map (kbd "C-c g") 'browse-url-dwim-search)
 ```
 
