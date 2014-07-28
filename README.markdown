@@ -1,12 +1,10 @@
 [![Build Status](https://secure.travis-ci.org/rolandwalker/browse-url-dwim.png?branch=master)](http://travis-ci.org/rolandwalker/browse-url-dwim)
 
-Overview
-========
+# Overview
 
 Context-sensitive external browse URL or Internet search from Emacs.
 
-Quickstart
-----------
+## Quickstart
 
 ```elisp
 (require 'browse-url-dwim)
@@ -23,8 +21,7 @@ Quickstart
 (setq browse-url-dwim-always-confirm-extraction nil)
 ```
 
-Explanation
------------
+## Explanation
 
 This small library for calling external browsers combines some of
 the functionality of `browse-url` and `thingatpt`.
@@ -66,8 +63,7 @@ or (equivalently)
 	M-x browse RET
 	M-x google RET
 
-Outside the USA
----------------
+## Outside the USA
 
 If you are outside the USA, you will want to customize
 `browse-url-dwim-permitted-tlds` so that your favorite
@@ -75,8 +71,7 @@ top-level domains will be recognized in context.  You
 may also wish to customize `browse-url-dwim-search-url`
 to point at an appropriate search engine.
 
-Notes
------
+## Notes
 
 To control which browser is invoked, see the underlying library
 `browse-url`.
@@ -89,8 +84,7 @@ for Internet search, but the user might prefer to bind
 (define-key browse-url-dwim-map (kbd "C-c g") 'browse-url-dwim-search)
 ```
 
-Compatibility and Requirements
-------------------------------
+## Compatibility and Requirements
 
 	GNU Emacs version 24.4-devel     : yes, at the time of writing
 	GNU Emacs version 24.3           : yes
