@@ -43,7 +43,7 @@ theory that `thingatpt` matches too liberally.  However,
 `browse-url` ignores, such as "www.yahoo.com" without the
 leading "http://".
 
-To use `browse-url-dwim`, add the following to your ~/.emacs file
+To use `browse-url-dwim`, add the following to your `~/.emacs` file
 
 ```elisp
 (require 'browse-url-dwim)      ; load library
