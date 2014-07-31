@@ -1,12 +1,12 @@
 ;;; browse-url-dwim.el --- Context-sensitive external browse URL or Internet search
 ;;
-;; Copyright (c) 2012-13 Roland Walker
+;; Copyright (c) 2012-14 Roland Walker
 ;;
 ;; Author: Roland Walker <walker@pobox.com>
 ;; Homepage: http://github.com/rolandwalker/browse-url-dwim
 ;; URL: http://raw.githubusercontent.com/rolandwalker/browse-url-dwim/master/browse-url-dwim.el
-;; Version: 0.6.6
-;; Last-Updated: 26 Oct 2013
+;; Version: 0.6.8
+;; Last-Updated: 31 Jul 2014
 ;; EmacsWiki: BrowseUrlDwim
 ;; Keywords: hypermedia
 ;; Package-Requires: ((string-utils "0.3.2"))
@@ -191,7 +191,7 @@
 ;;;###autoload
 (defgroup browse-url-dwim nil
   "Context-sensitive external browse URL or Internet search."
-  :version "0.6.6"
+  :version "0.6.8"
   :link '(emacs-commentary-link :tag "Commentary" "browse-url-dwim")
   :link '(url-link :tag "GitHub" "http://github.com/rolandwalker/browse-url-dwim")
   :link '(url-link :tag "EmacsWiki" "http://emacswiki.org/emacs/BrowseUrlDwim")
