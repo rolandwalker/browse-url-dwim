@@ -206,6 +206,11 @@
   :type 'boolean
   :group 'browse-url-dwim)
 
+(defcustom browse-url-dwim-max-prompt-length 40
+  "The maximum length for a default URL when prompted."
+  :type 'integer
+  :group 'browse-url-dwim)
+
 (defcustom browse-url-dwim-always-confirm-extraction t
   "Always prompt for confirmation of URLs detected from context."
   :type 'boolean
@@ -487,14 +492,15 @@ determining whether to add a scheme."
 
 The revised string is returned.
 
-Optional LENGTH-LIMIT (default 40) limits the length of the
-inserted default.
+Optional LENGTH-LIMIT limits the length of the inserted default.
+Defaults to the value of `browse-url-dwim-max-prompt-length' when
+not specified.
 
 PROMPT-STRING is expected to end with \": \", which will be added if
 not present.
 
 DEFAULT-STRING may be nil, in which case no default is inserted."
-  (setq length-limit (min (or length-limit 40) (length default-string)))
+  (setq length-limit (min (or length-limit browse-url-dwim-max-prompt-length) (length default-string)))
   (save-match-data
     (if (not default-string)
         (replace-regexp-in-string "[: ]*\\'" ": " prompt-string)
