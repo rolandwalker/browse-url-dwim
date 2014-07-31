@@ -4,6 +4,12 @@
 
 Context-sensitive external browse URL or Internet search from Emacs.
 
+ * [Quickstart](#quickstart)
+ * [Explanation](#explanation)
+ * [Outside the USA](#outside-the-usa)
+ * [Notes](#notes)
+ * [Compatibility and Requirements](#compatibility-and-requirements)
+
 ## Quickstart
 
 ```elisp
